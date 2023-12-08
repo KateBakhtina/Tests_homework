@@ -1,0 +1,9 @@
+task3.py
+venv
+.env
+packet_yandex/__init__.py
+packet_selenium/__init__.py
+packet_exersize/__init__.py
+.idea
+.pytest_cache
+__pycache__
