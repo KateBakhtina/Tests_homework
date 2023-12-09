@@ -3,7 +3,7 @@ from dotenv import dotenv_values
 from fake_useragent import UserAgent
 
 
-class Yandex:
+class MyYandex:
 
     def __init__(self, ya_token):
         self.url = "https://cloud-api.yandex.net/v1/disk/resources"
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     name_folder = "new_folder"
     ya_token = dotenv_values().get("YANDEX_TOKEN")
 
-    person = Yandex(ya_token)
+    person = MyYandex(ya_token)
     print(person.make_folder(name_folder)) # 201
     print(person.check_folder(name_folder)) # 200
 
