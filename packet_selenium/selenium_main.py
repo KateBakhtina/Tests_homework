@@ -1,7 +1,13 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
 from dotenv import dotenv_values
+
+# passp-field-phoneCode - id при отправке кода на почту если введен не тот емайл +
+# field:input-login:hint - id логина, который не подойдет +
+# field:input-passwd:hint - id неверного пароля +
 
 class YaAuthorization:
 
@@ -14,33 +20,34 @@ class YaAuthorization:
     def open_page(self):
         self.browser.get(self.url)
         time.sleep(3)
-        return "successfully"
 
     def select_mail(self):
-        email_click = self.browser.find_element(By.CLASS_NAME, "AuthLoginInputToggle-type") \
-            .find_element(By.CSS_SELECTOR, "[data-type='login']")
-        email_click.click()
+        self.browser.find_element(By.CLASS_NAME, "AuthLoginInputToggle-type") \
+                    .find_element(By.CSS_SELECTOR, "[data-type='login']")\
+                    .click()
         time.sleep(3)
-        return "successfully"
 
     def enter_login(self):
-        login_input = self.browser.find_element(By.ID, "passp-field-login")
-        login_input.send_keys(self.my_email)
+        self.browser.find_element(By.ID, "passp-field-login").send_keys(self.my_email)
         time.sleep(3)
-        return "successfully"
 
     def enter_continue(self):
-        enter_click = self.browser.find_element(By.ID, "passp:sign-in")
-        enter_click.click()
+        self.browser.find_element(By.ID, "passp:sign-in").click()
         time.sleep(5)
-        return "successfully"
+
+    def check_enter_continue(self, by_id):
+        try:
+            self.browser.find_element(By.ID, by_id)
+            return "error"
+        except NoSuchElementException:
+            return "successfully"
 
     def enter_password(self):
-        password = self.browser.find_element(By.ID, "passp-field-passwd")
-        password.send_keys(self.password)
+        self.browser.find_element(By.ID, "passp-field-passwd").send_keys(self.password)
         time.sleep(3)
-        return "successfully"
 
+    def browser_close(self):
+        self.browser.close()
 
 if __name__ == "__main__":
     password = dotenv_values().get("PASSWORD")

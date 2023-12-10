@@ -10,11 +10,8 @@ from dotenv import dotenv_values
 def test_ya_authorization(password, my_email):
 
     person = YaAuthorization(password, my_email)
-
-    assert person.open_page() == "successfully"
-    assert person.select_mail() == "successfully"
-    assert person.enter_login() == "successfully"
-    assert person.enter_continue() == "successfully"
-    assert person.enter_password() == "successfully"
-    assert person.enter_continue() == "successfully"
-
+    person.open_page()
+    person.select_mail()
+    person.enter_login()
+    person.enter_continue()
+    assert person.check_enter_login_one() == "successfully", "Некорректный логин"
