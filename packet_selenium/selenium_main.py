@@ -5,10 +5,6 @@ from selenium.common.exceptions import NoSuchElementException
 
 from dotenv import dotenv_values
 
-# passp-field-phoneCode - id при отправке кода на почту если введен не тот емайл +
-# field:input-login:hint - id логина, который не подойдет +
-# field:input-passwd:hint - id неверного пароля +
-
 class YaAuthorization:
 
     def __init__(self, password, my_email):
@@ -61,6 +57,7 @@ if __name__ == "__main__":
     person.enter_continue()
     person.enter_password()
     person.enter_continue()
+    person.browser_close()
 
 
 

@@ -9,5 +9,5 @@ from packet_yandex.ya_main import MyYandex
 )
 def test_my_yandex(ya_token, name_folder, expected):
     person = MyYandex(ya_token)
-    assert person.make_folder(name_folder) in expected # +
-    assert person.check_folder(name_folder) in expected
+    assert person.make_folder(name_folder) in expected, "Папка уже существует"
+    assert person.check_folder(name_folder) in expected, "Такой папки не существует"
